@@ -11,24 +11,33 @@ namespace CSD3354_2_A4
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Downloading file");
+            Console.WriteLine("downloading file");
             Download();
             Console.ReadLine();
+
         }
-        static async void Download()
+
+        static void Download()
         {
-            await Network.Download();
-            Console.WriteLine("Download Complete");
-        } 
-    }
-    class Network
-    {
-        static public Task Download()
-        {
-            return Task.Run(() => Thread.Sleep(3000));
+            Network.Download((message) => Console.WriteLine("Download complete " + message));
         }
     }
 
+    // Imaginary external network library
+
+    class Network
+    {
+        static public void Download(Action<String> callback)
+        {
+            Task.Run(() => {
+                Thread.Sleep(3000);
+                callback("completed");
+            });
+        }
     }
+}
+    
+
+    
 
 
