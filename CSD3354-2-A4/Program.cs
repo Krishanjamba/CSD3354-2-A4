@@ -15,13 +15,20 @@ namespace CSD3354_2_A4
             Download();
             Console.ReadLine();
         }
-
-        static void Download()
+        static async void Download()
         {
-            Task.Run(() => {
-                Thread.Sleep(3000);
-                Console.WriteLine("Download Complete");
-            });
+            await Network.Download();
+            Console.WriteLine("Download Complete");
+        } 
+    }
+    class Network
+    {
+        static public Task Download()
+        {
+            return Task.Run(() => Thread.Sleep(3000));
         }
     }
-}
+
+    }
+
+
